@@ -1,0 +1,37 @@
+id    = \x.    x
+
+-- BOOLEAN LOGIC --
+true  = \a.\b. a
+false = \c.\d. d
+not   = \x.    x (false) (true)
+and   = \a.\b. a (b)     (false)
+or    = \a.\b. a (true)  (b)
+xor   = \a.\b. a (not b) (b)
+
+-- COMBINATORS --
+S     = \a.\b.\c. a c (b c)
+K     = true
+KI    = false
+B     = S (K S) K
+
+-- CHURCH NUMBERALS --
+0     = \f.\v.           v
+1     = \f.\v.         f v
+2     = \f.\v.       f(f v)
+succ  = \n.\f.\v. f (n f v)
+
+3     = succ 2
+4     = + 1 3
+5     = + 2 3
+10    = * 2 5
+20    = * 4 5
+23    = + 20 3
+69    = * 23 3
+420   = (+ 20 (* 20 20))
+
++     = \a.\b. b succ a
+*     = \a.\b.\n. a (b n)
+^     = \a.\b.b a
+
+
+main num = 420
